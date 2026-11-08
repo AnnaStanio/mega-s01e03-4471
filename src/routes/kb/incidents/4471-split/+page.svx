@@ -4,7 +4,7 @@ title: '#4471 split · three problems, three tickets'
 owner: Anna Stanio
 status: open
 reviewed: 2026-11-08
-signature: Anna Stanio
+signature: v1.eyJzdWIiOiIxNDQxIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQxNDMxNTgsImV4cCI6MTc5NDIyOTU1OH0.9W27TqdDn_qP4uiGZs1kMHSgcsUtk_KdnMtHGMiM2Ko
 ---
 
 <script>
