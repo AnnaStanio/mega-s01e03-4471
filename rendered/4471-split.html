@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--e2jw2j--><!----><title>#4471 split · three problems, three tickets · support kb</title>
+		<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#6b6a66;--line:#e3e0d8;--accent:#2f6f5e;--warn:#b4501f;--warn-bg:#fbeee6;--note-bg:#eef5f2;--mono:ui-monospace, "Cascadia Code", Menlo, monospace}@media (prefers-color-scheme:dark){:root{--bg:#171716;--fg:#ecebe6;--muted:#9c9a93;--line:#34332f;--accent:#6fbfa6;--warn:#f0905d;--warn-bg:#3a2418;--note-bg:#1d2c27}}body{background:var(--bg);color:var(--fg);margin:0;font:16px/1.6 system-ui,sans-serif}.kb table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}.kb th,.kb td{border-bottom:1px solid var(--line);text-align:left;padding:.35rem .5rem}.kb code{font-family:var(--mono);font-size:.88em}.kb a{color:var(--accent)}.kb.svelte-e2jw2j{max-width:760px;margin:0 auto;padding:2rem 16px 4rem}.crumb.svelte-e2jw2j{font:.8rem var(--mono);color:var(--muted);text-decoration:none}h1.svelte-e2jw2j{margin:.25rem 0 .5rem;line-height:1.2}.meta.svelte-e2jw2j{color:var(--muted);flex-wrap:wrap;gap:.5rem 1rem;margin:0;font-size:.85rem;display:flex}.status.svelte-e2jw2j{border:1px solid var(--line);border-radius:99px;padding:0 .6rem}.stale.svelte-e2jw2j{color:var(--warn);font-weight:600}.banner.svelte-e2jw2j{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:.6rem 1rem}footer.svelte-e2jw2j{color:var(--muted);border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font-size:.8rem}
+</style>
+		<style>aside.svelte-17bri61{border-left:4px solid var(--accent);background:var(--note-bg);margin:1rem 0;padding:.5rem 1rem}aside.warn.svelte-17bri61{border-color:var(--warn);background:var(--warn-bg)}
+</style>
+		<style>.sum.svelte-1op6c6{font-size:1.1rem}.small.svelte-1op6c6{color:var(--muted);font-size:.85em}.none.svelte-1op6c6{color:var(--warn);font-weight:600}.stamp.svelte-1280m42{font:.85rem var(--mono);color:var(--muted);margin:2rem 0 0}.stamp.svelte-1280m42 b:where(.svelte-1280m42){color:var(--accent);letter-spacing:.04em}.missing.svelte-1280m42{color:var(--warn)}
+</style>
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents"><!--[--><!--[0--><!--[--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 split · three problems, three tickets</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Anna Stanio</b></span> <span class="status open svelte-e2jw2j">open</span> <span class="svelte-e2jw2j">reviewed 2026-11-08 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> says one bug: the parser reads dates month first. Its own table already
+disagrees, and the report bodies say more. Read them and #4471 holds <strong>three problems</strong>, each with
+its own fix. The queued parser fix closes only the first.</p> <aside class="warn svelte-17bri61"><!---->Not known, not one issue. Fixing the parser leaves the other two open, and they will keep coming in
+under the same subjects.<!----></aside><!----> <h2>What #4471 holds</h2> <p class="sum svelte-1op6c6"><strong>412</strong> reports merged into #4471 · <strong>3</strong> problems ·
+  every report placed</p> <table><thead><tr><th>problem</th><th>reports</th><th>tenants</th><th>channels</th><th>intake tagged</th><th>seen</th><th>tracked in</th></tr></thead><tbody><!--[--><tr><td><code>parser</code></td><td>374</td><td>11</td><td class="small svelte-1op6c6">app ×202 · email ×147 · form ×25</td><td class="small svelte-1op6c6">parser ×351 · hint ×23</td><td class="small svelte-1op6c6">2026-04-01 → 2026-10-04</td><td><!--[0--><a href="https://github.com/AnnaStanio/mega-s01e03-4471/issues/1">issue 1</a><!--]--></td></tr><tr><td><code>hint</code></td><td>33</td><td>3</td><td class="small svelte-1op6c6">form ×33</td><td class="small svelte-1op6c6">hint ×18 · parser ×15</td><td class="small svelte-1op6c6">2026-04-17 → 2026-09-22</td><td><!--[0--><a href="https://github.com/AnnaStanio/mega-s01e03-4471/issues/2">issue 2</a><!--]--></td></tr><tr><td><code>one-day</code></td><td>5</td><td>5</td><td class="small svelte-1op6c6">email ×3 · app ×2</td><td class="small svelte-1op6c6">parser ×5</td><td class="small svelte-1op6c6">2026-04-02 → 2026-10-04</td><td><!--[0--><a href="https://github.com/AnnaStanio/mega-s01e03-4471/issues/3">issue 3</a><!--]--></td></tr><!--]--></tbody></table><!----> <p>The counts come from the export at render time, one report per id (the export repeats some).</p> <h2>The three problems</h2> <p><strong><code>parser</code>: the shared parser reads every date month first.</strong> Every tenant on file writes the day
+first, so any date with a day of 12 or less comes out with day and month swapped: 7 April goes out
+as 4 July. It reaches us through every channel and every tenant. Tracked in <a href="https://github.com/AnnaStanio/mega-s01e03-4471/issues/1" rel="nofollow">issue 1</a>.</p> <p><strong><code>hint</code>: the booking-v3 form tells people to type the month first.</strong> Its date field prints <code>MM/DD/YYYY</code>, people follow it, and the form reads the date day first. Only booking-v3 tenants, only
+through the form. The swap happens before the parser, so the parser fix does not touch it. Tracked
+in <a href="https://github.com/AnnaStanio/mega-s01e03-4471/issues/2" rel="nofollow">issue 2</a>.</p> <p><strong><code>one-day</code>: bookings move by one day.</strong> Day and month stay put; the date is a day early or late.
+Lisbon sees Tuesday and Toronto sees Monday for the same meeting; an invite arrives before its
+booking. That points at time zones, not at the parser. The desk had read these as a one-day move
+(<code>desk-notes.json</code>) but still counted them under the parser. Tracked in <a href="https://github.com/AnnaStanio/mega-s01e03-4471/issues/3" rel="nofollow">issue 3</a>.</p> <h2>Why it was one ticket</h2> <ul><li>The <a href="/kb/triage/dedupe">dedupe rule</a> merges on the subject line. All three problems arrive under
+the same subjects (“Wrong day on the invite”, “Dates mixed up”), so the rule cannot tell them
+apart. Only the body and the tenant can.</li> <li>Intake’s tag is a guess from the reporter’s browser, not the tenant. It calls form-hint reports <code>parser</code> and parser reports <code>hint</code>. Place a report by its tenant, its form and its channel.</li></ul> <h2>What changes on the desk</h2> <ul><li>#4471 is not “known”. Keep it for <code>parser</code> only; move the other reports to their tickets.</li> <li>A new date report: read the body. Two dates with day and month swapped through a booking-v3 form
+is <code>hint</code>; any other swap is <code>parser</code>; a date a day off is <code>one-day</code>.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-T2K1-9SE9</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			
+		</div>
+  </body>
+</html>
