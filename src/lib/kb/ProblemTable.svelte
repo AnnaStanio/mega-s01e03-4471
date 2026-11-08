@@ -6,11 +6,11 @@
   import { splitTicket, type Problem } from '#lib/kb/problems';
 
   // issues: where each problem is tracked now, problem → { label, href }.
-  let { ticket, issues = {} }: { ticket: number; issues?: Partial<Record<Problem, { label: string; href: string }>> } =
+  let { ticket, issues = {} }: { ticket: number; issues?: Partial<Record<Problem, { label: string; href: string; state: string }>> } =
     $props();
 
   const split = $derived(splitTicket(reports as Report[], ticket, tenantOf, notes.oneDayMove));
-  const placed = $derived(split.groups.filter((g) => g.problem !== 'unplaced').reduce((n, g) => n + g.reports.length, 0));
+  const placed = $derived(split.groups.filter((g) => g.problem !== 'unplaced' && g.problem !== 'one-day').reduce((n, g) => n + g.reports.length, 0));
   const list = (m: Record<string, number>) =>
     Object.entries(m)
       .sort((a, b) => b[1] - a[1])
@@ -27,7 +27,7 @@
 
 <table>
   <thead>
-    <tr><th>problem</th><th>reports</th><th>tenants</th><th>channels</th><th>intake tagged</th><th>seen</th><th>tracked in</th></tr>
+    <tr><th>problem</th><th>reports</th><th>tenants</th><th>channels</th><th>intake tagged</th><th>seen</th><th>tracked in</th><th>state</th></tr>
   </thead>
   <tbody>
     {#each split.groups as g (g.problem)}
@@ -40,10 +40,18 @@
         <td class="small">{list(g.taggedAs)}</td>
         <td class="small">{g.firstSeen} → {g.lastSeen}</td>
         <td>{#if issue}<a href={issue.href}>{issue.label}</a>{:else}<span class="none">no ticket</span>{/if}</td>
+        <td>{issue?.state ?? ''}</td>
       </tr>
     {/each}
   </tbody>
 </table>
+
+{#if split.alsoFiled}
+  <p class="small">
+    The {split.alsoFiled} one-day reports are also counted under their tenant's cause, as the desk files them, so the
+    rows add up to more than {split.total}.
+  </p>
+{/if}
 
 <style>
   .sum { font-size: 1.1rem; }

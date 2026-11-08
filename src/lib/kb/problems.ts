@@ -5,9 +5,9 @@ import { causeOf, uniqueById, type Report, type Tenant } from '#lib/kb/causes';
 export type Problem = 'parser' | 'hint' | 'one-day';
 export const PROBLEMS: readonly Problem[] = ['parser', 'hint', 'one-day'];
 
-// A one-day move is not a day/month swap, whatever the tenant: it gets its own problem.
-export function problemOf(r: Report, t: Tenant | undefined, oneDayMove: readonly string[]): Problem | 'unplaced' {
-  if (oneDayMove.includes(r.id)) return 'one-day';
+// Counted the desk's way: every report under its tenant's cause (causes.ts). A one-day move is not a
+// day/month swap, so it also gets a problem of its own, while it stays counted where it is filed.
+export function problemOf(r: Report, t: Tenant | undefined): Problem | 'unplaced' {
   return causeOf(r, t) ?? 'unplaced';
 }
 
@@ -29,13 +29,15 @@ export function splitTicket(
   ticket: number,
   tenantOf: (r: Report) => Tenant | undefined,
   oneDayMove: readonly string[],
-): { total: number; groups: ProblemGroup[] } {
+): { total: number; alsoFiled: number; groups: ProblemGroup[] } {
   const merged = uniqueById(reports).filter((r) => r.mergedInto === ticket);
   const by = new Map<ProblemGroup['problem'], Report[]>();
   for (const r of merged) {
-    const p = problemOf(r, tenantOf(r), oneDayMove);
+    const p = problemOf(r, tenantOf(r));
     by.set(p, [...(by.get(p) ?? []), r]);
   }
+  const moved = merged.filter((r) => oneDayMove.includes(r.id));
+  if (moved.length) by.set('one-day', moved);
   const groups = [...by.entries()]
     .map(([problem, rs]) => {
       const days = rs.map((r) => r.receivedAt.slice(0, 10)).sort();
@@ -50,5 +52,5 @@ export function splitTicket(
       };
     })
     .sort((a, b) => b.reports.length - a.reports.length);
-  return { total: merged.length, groups };
+  return { total: merged.length, alsoFiled: moved.length, groups };
 }

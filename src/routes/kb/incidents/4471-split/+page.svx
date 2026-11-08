@@ -14,19 +14,20 @@ signature: Anna Stanio
 
   const REPO = 'https://github.com/AnnaStanio/mega-s01e03-4471/issues';
   const issues = {
-    parser: { label: 'issue 1', href: `${REPO}/1` },
-    hint: { label: 'issue 2', href: `${REPO}/2` },
-    'one-day': { label: 'issue 3', href: `${REPO}/3` },
+    parser: { label: 'issue 1', href: `${REPO}/1`, state: 'fixed' },
+    hint: { label: 'issue 2', href: `${REPO}/2`, state: "won't fix: form retired" },
+    'one-day': { label: 'issue 3', href: `${REPO}/3`, state: 'open' },
   };
 </script>
 
-[#4471](/kb/incidents/4471) says one bug: the parser reads dates month first. Its own table already
-disagrees, and the report bodies say more. Read them and #4471 holds **three problems**, each with
-its own fix. The queued parser fix closes only the first.
+[#4471](/kb/incidents/4471) said one bug: the parser reads dates month first. Its own table already
+disagreed, and the report bodies say more. Read them and #4471 held **three problems**, each with
+its own fix. Engineering closed #4471 on 5 October: the parser is fixed and the booking-v3 form is
+retired. The third problem was never part of either.
 
 <Callout kind="warn">
-Not known, not one issue. Fixing the parser leaves the other two open, and they will keep coming in
-under the same subjects.
+#4471 is closed, but one problem in it is still open: bookings that move by one day. Keep new reports
+of it in issue 3, not in #4471.
 </Callout>
 
 ## What #4471 holds
@@ -39,19 +40,21 @@ The counts come from the export at render time, one report per id (the export re
 
 **`parser`: the shared parser reads every date month first.** Every tenant on file writes the day
 first, so any date with a day of 12 or less comes out with day and month swapped: 7 April goes out
-as 4 July. It reaches us through every channel and every tenant. Tracked in
-[issue 1](https://github.com/AnnaStanio/mega-s01e03-4471/issues/1).
+as 4 July. It reaches us through every channel and every tenant. **Fixed**
+("fix(dates): parse dd/mm for eu locales"); [issue 1](https://github.com/AnnaStanio/mega-s01e03-4471/issues/1)
+is closed.
 
 **`hint`: the booking-v3 form tells people to type the month first.** Its date field prints
 `MM/DD/YYYY`, people follow it, and the form reads the date day first. Only booking-v3 tenants, only
-through the form. The swap happens before the parser, so the parser fix does not touch it. Tracked
-in [issue 2](https://github.com/AnnaStanio/mega-s01e03-4471/issues/2).
+through the form. The swap happens before the parser, so the parser fix does not touch it. **Won't fix**:
+the booking-v3 form is retired, so the hint is gone with it;
+[issue 2](https://github.com/AnnaStanio/mega-s01e03-4471/issues/2) is closed as not planned.
 
 **`one-day`: bookings move by one day.** Day and month stay put; the date is a day early or late.
 Lisbon sees Tuesday and Toronto sees Monday for the same meeting; an invite arrives before its
 booking. That points at time zones, not at the parser. The desk had read these as a one-day move
-(`desk-notes.json`) but still counted them under the parser. Tracked in
-[issue 3](https://github.com/AnnaStanio/mega-s01e03-4471/issues/3).
+(`desk-notes.json`) but still counted them under the parser. **Open**: neither the parser fix nor the form's
+retirement touches it. Tracked in [issue 3](https://github.com/AnnaStanio/mega-s01e03-4471/issues/3).
 
 ## Why it was one ticket
 
@@ -63,8 +66,8 @@ booking. That points at time zones, not at the parser. The desk had read these a
 
 ## What changes on the desk
 
-- #4471 is not "known". Keep it for `parser` only; move the other reports to their tickets.
-- A new date report: read the body. Two dates with day and month swapped through a booking-v3 form
-  is `hint`; any other swap is `parser`; a date a day off is `one-day`.
+- #4471 was not one known issue. Closing it closed two problems, not three.
+- A new date report: read the body. A date a day off is `one-day`: add it to issue 3. A new day/month
+  swap after the parser fix is a regression: open a new ticket, do not reopen #4471.
 
 <RenderStamp {signature} />
